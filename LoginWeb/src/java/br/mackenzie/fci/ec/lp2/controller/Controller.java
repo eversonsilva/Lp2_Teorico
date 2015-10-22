@@ -9,16 +9,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author 1147106
+ * @author Everson
  */
-public class FrontController extends HttpServlet {
-    private String command;
+@WebServlet(name = "Controller", urlPatterns = {"/principal"})
+public class Controller extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,36 +32,12 @@ public class FrontController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet FrontController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            
-            if(command.startsWith("usuario")){
-                
-                if(command.endsWith("login")){
-                    
-                    String username = request.getParameter("username");
-                    String password = request.getParameter("password");
-             
-                    if(LoginManager.authorize(username, password)){
-                        out.println("<h1>BEM VINDO "+username+"</h1>");
-                    } else {
-                        out.println("YOU SHALL NOT PASS!");
-                    }
-                }
-                
-                
+
+        if (request != null && request.getParameter("command") != null) {
+            if (request.getParameter("command").startsWith(("Usuario."))) {
+                RequestDispatcher rd = request.getRequestDispatcher("/usuario");
+                rd.forward(request, response);
             }
-            
-            
-            out.println("</body>");
-            out.println("</html>");
         }
     }
 
@@ -90,7 +67,6 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        command = request.getParameter("command");
         processRequest(request, response);
     }
 
@@ -103,11 +79,4 @@ public class FrontController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
-//if (request != null && request.getParameter("command") != null) {
-  //          if (request.getParameter("command").startsWith(("Usuario."))) {
-    //            RequestDispatcher rd = request.getRequestDispatcher("/usuario");
-      //          rd.forward(request, response);
-        //        }
-          //  }
