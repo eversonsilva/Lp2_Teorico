@@ -160,4 +160,33 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
         return resposta;
         
     }
+    
+    public Usuario readByName(String nome){
+        Usuario usuario = new Usuario();
+        con = ConnectionFactory.getConnection();
+        
+        String sql = "SELECT * FROM usuario WHERE username = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1,nome);
+        
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                usuario.setId_usuario(  rs.getInt("id_usuario")   );
+                usuario.setUsername(  rs.getString("username")  );
+                usuario.setSenha(  rs.getString("senha")  );
+            }
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        return usuario;
+    }
 }
