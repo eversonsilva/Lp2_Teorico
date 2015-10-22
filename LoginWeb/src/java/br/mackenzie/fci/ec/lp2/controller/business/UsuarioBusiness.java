@@ -47,6 +47,11 @@ public class UsuarioBusiness extends HttpServlet {
         if("Usuario.formulario".equals(request.getParameter("command"))){
             request.getRequestDispatcher("WEB-INF/jsp/cadastrar.jsp").forward(request, response);
         }
+        if("Usuario.login".equals(request.getParameter("command"))){
+            String username = request.getParameter("username");
+            String password = request.getParameter("senha");
+            request.getRequestDispatcher("WEB-INF/jsp/usuario/home.jsp").forward(request, response);
+        }
         if("Usuario.verifica".equals(request.getParameter("command"))){
             request.getRequestDispatcher("WEB-INF/jsp/bemVindo.jsp").forward(request, response);
         }
