@@ -4,6 +4,7 @@
     Author     : Everson
 --%>
 
+<%@page import="br.mackenzie.fci.ec.lp2.model.Usuario"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
@@ -12,7 +13,10 @@
         <title>Bem Vindo</title>
     </head>
     <body>
-        <h1>Bem Vindo</h1>
+        <h1>Bem Vindo <%
+ Usuario usuario = (Usuario) session.getAttribute("usuario");
+ out.println(usuario.getUsername());
+%></h1>
         
     
     </body>
