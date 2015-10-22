@@ -7,6 +7,7 @@ package br.mackenzie.fci.ec.lp2.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -104,3 +105,9 @@ public class FrontController extends HttpServlet {
     }// </editor-fold>
 
 }
+//if (request != null && request.getParameter("command") != null) {
+  //          if (request.getParameter("command").startsWith(("Usuario."))) {
+    //            RequestDispatcher rd = request.getRequestDispatcher("/usuario");
+      //          rd.forward(request, response);
+        //        }
+          //  }

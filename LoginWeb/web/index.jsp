@@ -20,7 +20,7 @@
 
         <form method="POST" id="formLogin" action="${pageContext.request.contextPath}/principal">
 
-            <input type="hidden" name="command" value="Usuario.login">
+            <input type="hidden" name="command" value="Usuario.sejaBemVindo">
             <label for="name">Username:</label> <input type="text" id="username" name="username" size="30" required/><br/>
             <label for="name">Senha:</label> <input type="password" id="password" name="senha" size="30" required/>
             <br>

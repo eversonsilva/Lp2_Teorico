@@ -12,6 +12,8 @@
         <title>Bem Vindo</title>
     </head>
     <body>
-        <h1>Bem Vindo ${Usuario.username}</h1>
+        <h1>Bem Vindo</h1>
+        
+    
     </body>
 </html>
