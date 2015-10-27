@@ -123,5 +123,36 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario>{
         }
         return funcionario;
     }
+     
+     public List listarJoin() {
+        List funcionarios= new ArrayList<String>();
+        //~~~~~~~~~~~~~~PASSO 2 - CRIA QUERY E STATEMENT~~~~~~~~~~~~~~//
+        String sql = "SELECT F.ID_FUNCIONARIO, F.NOME, C.NOME CARGO, D.NOME DEPARTAMENTO\n" +
+                    "FROM EMPRESA.FUNCIONARIO  AS F \n" +
+                    "INNER JOIN EMPRESA.CARGO AS C\n" +
+                    "ON F.ID_CARGO = C.ID_CARGO\n" +
+                    "INNER JOIN EMPRESA.DEPARTAMENTO D\n" +
+                    "ON F.ID_DEPARTAMENTO = D.ID_DEPARTAMENTO";
+        try {
+            Connection connection=Conexao.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql);
+            //~~~~~~~~~~~~~~PASSO 3 - EXECUTAR O STATEMENT~~~~~~~~~~~~~~//
+            ResultSet rs = ps.executeQuery();
+            //~~~~~~~~~~~~~~PASSO 4 - MOSTRAT RESULTADO~~~~~~~~~~~~~~//
+            while (rs.next()) {
+                funcionarios.add(Integer.toString(rs.getInt("ID_FUNCIONARIO")));
+                funcionarios.add(rs.getString("NOME"));
+                funcionarios.add(rs.getString("CARGO"));
+                funcionarios.add(rs.getString("DEPARTAMENTO"));
+            }
+            //~~~~~~~~~~~~~~PASSO 5 - FECHAR TUDO~~~~~~~~~~~~~~//
+            rs.close();
+            ps.close();
+            connection.close();
+        } catch (SQLException | PersistenciaException ex) {
+            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return funcionarios;
+    }
     
 }

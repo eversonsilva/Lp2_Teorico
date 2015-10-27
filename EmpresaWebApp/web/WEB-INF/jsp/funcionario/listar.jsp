@@ -22,13 +22,25 @@
         
        <br/><br/><br/>
        
-       <c:forEach var="funcionario" items="${funcionarios}">
-           <c:out value="${funcionario.codigo}"/>&nbsp;&#45;&nbsp;
-           <c:out value="${funcionario.nome}"/>
-           
-           
-           <br/>
-       </c:forEach>
+       <table style="width:100%">
+            <tr>
+              <td>ID</td>
+              <td>NOME</td> 
+              <td>CARGO</td>
+              <td>DEPARTAMENTO</td>
+            </tr>
+            <tr>
+                <c:forEach items="${funcionarios}" var="funcionario" varStatus="i">
+                   <c:if test="${(i.index + 1) % 4 == 0}"> 
+                        <td>${funcionario}</td>
+                        </tr>
+                        <tr>
+                    </c:if>
+                    <c:if test="${(i.index + 1) % 4 != 0}"> 
+                        <td>${funcionario}</td>
+                    </c:if>
+                </c:forEach>
+        </table>
        
     </body>
 </html>

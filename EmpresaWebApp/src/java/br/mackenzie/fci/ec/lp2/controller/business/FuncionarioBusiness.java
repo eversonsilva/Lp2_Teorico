@@ -137,12 +137,8 @@ public class FuncionarioBusiness extends HttpServlet {
                 }
             }
             if("Funcionario.listar".equals(request.getParameter("command"))){
-                try {
-                    request.setAttribute("funcionarios", new FuncionarioDAO().listar());
-                    request.getRequestDispatcher("WEB-INF/jsp/funcionario/listar.jsp").forward(request, response);
-                } catch (PersistenciaException ex) {
-                    Logger.getLogger(FuncionarioBusiness.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                request.setAttribute("funcionarios", new FuncionarioDAO().listarJoin());
+                request.getRequestDispatcher("WEB-INF/jsp/funcionario/listar.jsp").forward(request, response);
                 
             }
         }

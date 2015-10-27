@@ -43,4 +43,10 @@ public class Cargo implements Serializable{
     public void setNome(String nome) {
         this.nome = nome;
     }   
+    
+    @Override
+    public String toString() {
+        return "Cargo{" + "codigo=" + codigo + ", nome=" + nome + '}';
+    }
+    
 }
