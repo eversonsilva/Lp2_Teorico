@@ -1,9 +1,8 @@
 <%-- 
-    Document   : confirmarRemocao
-    Created on : 16/10/2015, 18:31:35
-    Author     : Everson
+    Document   : listar
+    Created on : 22/09/2015, 10:58:48
+    Author     : GabrielOutor
 --%>
-
 
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -21,12 +20,6 @@
             <input type="text" name="codigo" size="30" readonly="true" value="${funcionario.codigo}">
             <label for="nome">Nome:</label> 
             <input type="text" name="nome" size="30" readonly="true" value="${funcionario.nome}">
-            <br>
-            <label for="nome">Cargo:</label> 
-            <input type="text" name="cargo" size="30" readonly="true" value="${cargo.nome}">
-            <br>
-            <label for="nome">Departamento:</label> 
-            <input type="text" name="departamento" size="30" readonly="true" value="${departamento.nome}">
             <br>
             <input type="submit" value="Enviar">
             <input type="button" onClick="location.href='${pageContext.request.contextPath}/principal?command=Funcionario.listar'" value="Cancelar">

@@ -47,8 +47,10 @@ public class FuncionarioBusiness extends HttpServlet {
                     Funcionario funcionario=new Funcionario();
                     funcionario.setNome(request.getParameter("nome"));
                     funcionario.setCodigo(Integer.parseInt(request.getParameter("codigo")));
+                    funcionario.setCargo(Integer.parseInt(request.getParameter("cargos")));
+                    funcionario.setDepartamento(Integer.parseInt(request.getParameter("departamentos")));
                     new FuncionarioDAO().alterar(funcionario);
-                    request.setAttribute("funcioanrios", new FuncionarioDAO().listar());
+                    request.setAttribute("funcionarios", new FuncionarioDAO().listarJoin());
                     request.getRequestDispatcher("WEB-INF/jsp/funcionario/listar.jsp").forward(request, response);
                 } catch (PersistenciaException ex) {
                     Logger.getLogger(CargoBusiness.class.getName()).log(Level.SEVERE, null, ex);
@@ -59,10 +61,8 @@ public class FuncionarioBusiness extends HttpServlet {
                     Funcionario funcionario=new Funcionario();
                     funcionario.setNome(request.getParameter("nome"));
                     funcionario.setCodigo(Integer.parseInt(request.getParameter("codigo")));
-                    //funcionario.setCargo(Integer.SIZE);
-                    //funcionario.setDepartamento(Integer.MIN_VALUE);
                     new FuncionarioDAO().remover(funcionario);
-                    request.setAttribute("funcionarios", new FuncionarioDAO().listar());
+                    request.setAttribute("funcionarios", new FuncionarioDAO().listarJoin());
                     request.getRequestDispatcher("WEB-INF/jsp/funcionario/listar.jsp").forward(request, response);
                 } catch (PersistenciaException ex) {
                     Logger.getLogger(CargoBusiness.class.getName()).log(Level.SEVERE, null, ex);
@@ -82,10 +82,6 @@ public class FuncionarioBusiness extends HttpServlet {
             if("Funcionario.removerPorId".equals(request.getParameter("command"))){
                 try {
                     Funcionario funcionario = new Funcionario(Integer.parseInt(request.getParameter("funcionarios")));
-                    Cargo cargo = new Cargo(Integer.parseInt(request.getParameter("cargos")));
-                    Departamento departamento = new Departamento(Integer.parseInt(request.getParameter("departamentos")));
-                    request.setAttribute("cargo", new CargoDAO().listarPorId(cargo));
-                    request.setAttribute("departamento", new DepartamentoDAO().listarPorId(departamento));
                     request.setAttribute("funcionario", new FuncionarioDAO().listarPorId(funcionario));
                     request.getRequestDispatcher("WEB-INF/jsp/funcionario/confirmarRemocao.jsp").forward(request, response);
                 } catch (PersistenciaException ex) {
@@ -105,8 +101,6 @@ public class FuncionarioBusiness extends HttpServlet {
             if("Funcionario.remover".equals(request.getParameter("command"))){
                 try {
                     request.setAttribute("funcionarios", new FuncionarioDAO().listar());
-                    request.setAttribute("cargos", new CargoDAO().listar());
-                    request.setAttribute("departamentos", new DepartamentoDAO().listar());
                     request.getRequestDispatcher("WEB-INF/jsp/funcionario/remover.jsp").forward(request, response);
                 } catch (PersistenciaException ex) {
                     Logger.getLogger(CargoBusiness.class.getName()).log(Level.SEVERE, null, ex);
@@ -125,7 +119,7 @@ public class FuncionarioBusiness extends HttpServlet {
             if("Funcionario.inserir".equals(request.getParameter("command"))){
                 try {
                     Funcionario funcionario=new Funcionario();
-                    funcionario.setNome(request.getParameter("name"));//Integer.parseInt(request.getParameter("funcionarios"))
+                    funcionario.setNome(request.getParameter("name"));
                     funcionario.setCargo(Integer.parseInt(request.getParameter("cargos")));
                     funcionario.setDepartamento(Integer.parseInt(request.getParameter("departamentos")));
                     new FuncionarioDAO().inserir(funcionario);

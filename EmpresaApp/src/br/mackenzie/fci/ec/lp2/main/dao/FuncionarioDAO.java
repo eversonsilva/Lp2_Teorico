@@ -114,6 +114,8 @@ public class FuncionarioDAO implements GenericoDAO<Funcionario>{
             while(rs.next()){
                 funcionario.setCodigo(rs.getInt(("ID_FUNCIONARIO")));
                 funcionario.setNome(rs.getString(("NOME")));
+                funcionario.setCargo(rs.getInt(("ID_CARGO")));
+                funcionario.setDepartamento(rs.getInt(("ID_DEPARTAMENTO")));
             }
             rs.close();
             connection.close();
